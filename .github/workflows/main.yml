@@ -1,4 +1,3 @@
-# Name of workflow
 name: Lint and Test workflow
 
 on:
@@ -13,15 +12,11 @@ on:
       - main
       - JoeBranch
 
-# Jobs to carry out
 jobs:
   test:
-    # Operating system to run job on
     runs-on: ubuntu-latest
 
-    # Steps in job
     steps:
-      # Get code from repo
       - name: Checkout code
         uses: actions/checkout@v1
 
@@ -30,18 +25,14 @@ jobs:
         with:
           node-version: 21.x
 
-      # Install dependencies
       - name: 🧰 Install Deps
         run: npm install
-        
-      # Run lint
+
       - name: Run Lint
-        run: npm run lint
+        run: npm run lint --prefix client
 
-      # Run build
       - name: Run Build
-        run: npm run build
+        run: npm run build --prefix client
 
-      # Run tests
       - name: Run Tests
-        run: npm run test
+        run: npm run test --prefix client
